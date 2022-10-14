@@ -1,4 +1,5 @@
-﻿using Banco.Models;
+﻿using Banco.Data;
+using Banco.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,38 @@ namespace Banco.Controllers
 
     public class ClienteController : ControllerBase
     {
-        private static List<Cliente> clientes = new List<Cliente>();
+
+        private BancoContext _context;
+
+        public ClienteController(BancoContext context)
+        {
+            _context = context;
+        }
 
         [HttpPost]
-        public void AdicionaCliente([FromBody]Cliente cliente)
+        public IActionResult AdicionaCliente([FromBody]Cliente cliente)
         {
-            clientes.Add(cliente);
-            Console.WriteLine(cliente.Nome);
+            _context.Clientes.Add(cliente);
+            return CreatedAtAction(nameof(RecuperaClientesPorId), new { Id = cliente.Id }, cliente);
         }
+
+        [HttpGet]
+        public IActionResult RecuperaClientes()
+        {
+            return Ok(_context.Clientes);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult RecuperaClientesPorId(int id)
+        {
+            Cliente cliente = _context.Clientes.FirstOrDefault(cliente => cliente.Id == id);
+            if(cliente != null)
+            {
+                return Ok(cliente);
+            }
+
+            return NotFound();
+        }
+
     }
 }

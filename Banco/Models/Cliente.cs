@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,10 +8,23 @@ namespace Banco.Models
 {
     public class Cliente
     {
+        [Key]
+        [Required]
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "O nome é obrigatório")]
         public string Nome { get; set; }
-        public bool Tipo { get; set; }
-        public int CpfCnpj { get; set; }
+
+        [Required(ErrorMessage = "O tipo é obrigatório")]
+        public string Tipo { get; set; }
+
+        [Required]
+        [StringLength(14, ErrorMessage = "O CPF / CNPJ é obrigatório")]
+        public string CpfCnpj { get; set; }
+
         public string Endereco { get; set; }
+
+        [StringLength(11, ErrorMessage = "Telefone inválido")]
         public string Telefone { get; set; }
     }
 }
