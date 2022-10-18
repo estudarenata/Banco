@@ -25,13 +25,14 @@ namespace Banco.Controllers
         public IActionResult AdicionaCliente([FromBody]Cliente cliente)
         {
             _context.Clientes.Add(cliente);
+            _context.SaveChanges();
             return CreatedAtAction(nameof(RecuperaClientesPorId), new { Id = cliente.Id }, cliente);
         }
 
         [HttpGet]
-        public IActionResult RecuperaClientes()
+        public IEnumerable<Cliente> RecuperaClientes()
         {
-            return Ok(_context.Clientes);
+            return _context.Clientes;
         }
 
         [HttpGet("{id}")]
@@ -44,6 +45,23 @@ namespace Banco.Controllers
             }
 
             return NotFound();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult AtualizaCliente(int id, [FromBody] Cliente clienteNovo)
+        {
+            Cliente cliente = _context.Clientes.FirstOrDefault(cliente => cliente.Id == id);
+            if (cliente == null) 
+            {
+                return NotFound("Cliente não existe");
+            }
+            cliente.Nome = clienteNovo.Nome;
+            cliente.Tipo = clienteNovo.Tipo;
+            cliente.CpfCnpj = clienteNovo.CpfCnpj;
+            cliente.Endereco = clienteNovo.Endereco;
+            cliente.Telefone = clienteNovo.Telefone;
+            _context.SaveChanges();
+            return NoContent();
         }
 
     }

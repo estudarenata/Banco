@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Banco.Models
 {
@@ -15,7 +11,8 @@ namespace Banco.Models
         [Required(ErrorMessage = "O nome é obrigatório")]
         public string Nome { get; set; }
 
-        [Required(ErrorMessage = "O tipo é obrigatório")]
+        [Required]
+        [StringLength(2, ErrorMessage = "O tipo é obrigatório")]
         public string Tipo { get; set; }
 
         [Required]
