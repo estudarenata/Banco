@@ -15,7 +15,7 @@ namespace Banco.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(type: "text", nullable: false),
-                    Tipo = table.Column<string>(type: "varchar(2)", maxLength: 2, nullable: false),
+                    Tipo = table.Column<int>(type: "int", nullable: false),
                     CpfCnpj = table.Column<string>(type: "varchar(14)", maxLength: 14, nullable: false),
                     Endereco = table.Column<string>(type: "text", nullable: true),
                     Telefone = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: true)
@@ -32,7 +32,7 @@ namespace Banco.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
-                    NumeroDaConta = table.Column<string>(type: "text", nullable: false),
+                    NumeroDaConta = table.Column<string>(type: "text", nullable: true),
                     DepositoInicial = table.Column<double>(type: "double", nullable: false),
                     DataAbertura = table.Column<DateTime>(type: "datetime", nullable: false),
                     Saldo = table.Column<double>(type: "double", nullable: false)

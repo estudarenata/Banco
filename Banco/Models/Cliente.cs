@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Banco.Models.Enums;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Banco.Models
 {
@@ -12,8 +14,8 @@ namespace Banco.Models
         public string Nome { get; set; }
 
         [Required]
-        [StringLength(2, ErrorMessage = "O tipo é obrigatório")]
-        public string Tipo { get; set; }
+        //[StringLength(2, ErrorMessage = "O tipo é obrigatório")]
+        public TipoStatus Tipo { get; set; }
 
         [Required]
         [StringLength(14, ErrorMessage = "O CPF / CNPJ é obrigatório")]
@@ -23,5 +25,18 @@ namespace Banco.Models
 
         [StringLength(11, ErrorMessage = "Telefone inválido")]
         public string Telefone { get; set; }
+
+        //public ICollection<Conta> Contas { get; set; } = new List<Conta>();
+
+
+        //public Cliente(int id, string nome, TipoStatus tipo, string cpfCnpj, string endereco, string telefone)
+        //{
+        //    Id = id;
+        //    Nome = nome;
+        //    Tipo = tipo;
+        //    CpfCnpj = cpfCnpj;
+        //    Endereco = endereco;
+        //    Telefone = telefone;
+        //}
     }
 }

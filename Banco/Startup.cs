@@ -1,4 +1,5 @@
 using Banco.Data;
+using Banco.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,7 @@ namespace Banco
         {
             services.AddDbContext<BancoContext>(opts => opts.UseMySQL(Configuration.GetConnectionString("BancoConnection")));
             services.AddControllers();
+            services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Banco", Version = "v1" });

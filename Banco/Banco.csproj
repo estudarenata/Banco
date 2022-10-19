@@ -5,16 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\**" />
-    <Content Remove="Migrations\**" />
-    <EmbeddedResource Remove="Migrations\**" />
-    <None Remove="Migrations\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Migrations\20221014140624_CriandoTabelaClienteEConta.cs" />
-    <Compile Include="Migrations\20221014140624_CriandoTabelaClienteEConta.Designer.cs" />
-    <Compile Include="Migrations\BancoContextModelSnapshot.cs" />
+    <Compile Remove="Data\NovaPasta1\**" />
+    <Content Remove="Data\NovaPasta1\**" />
+    <EmbeddedResource Remove="Data\NovaPasta1\**" />
+    <None Remove="Data\NovaPasta1\**" />
   </ItemGroup>
 
   <ItemGroup>

@@ -39,10 +39,8 @@ namespace Banco.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("varchar(11)");
 
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("varchar(2)");
+                    b.Property<int>("Tipo")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -65,7 +63,6 @@ namespace Banco.Migrations
                         .HasColumnType("double");
 
                     b.Property<string>("NumeroDaConta")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<double>("Saldo")

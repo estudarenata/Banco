@@ -1,4 +1,5 @@
 ﻿using Banco.Data;
+using Banco.Data.Repository;
 using Banco.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,12 +14,13 @@ namespace Banco.Controllers
 
     public class ClienteController : ControllerBase
     {
-
         private BancoContext _context;
+        private readonly IClienteRepository _clienteRepository;
 
-        public ClienteController(BancoContext context)
+        public ClienteController(BancoContext context, IClienteRepository clienteRepository)
         {
             _context = context;
+            _clienteRepository = clienteRepository;
         }
 
         [HttpPost]
@@ -38,7 +40,8 @@ namespace Banco.Controllers
         [HttpGet("{id}")]
         public IActionResult RecuperaClientesPorId(int id)
         {
-            Cliente cliente = _context.Clientes.FirstOrDefault(cliente => cliente.Id == id);
+            Cliente cliente = _clienteRepository.GetById(id);
+            
             if(cliente != null)
             {
                 return Ok(cliente);
@@ -63,6 +66,5 @@ namespace Banco.Controllers
             _context.SaveChanges();
             return NoContent();
         }
-
     }
 }
