@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Banco.Models
 {
@@ -35,16 +33,5 @@ namespace Banco.Models
         
         }
     }
-
-        //public Conta(int id, int clienteId, string numeroDaConta, double depositoInicial, DateTime dataAbertura, double saldo, Cliente cliente)
-        //{
-        //    Id = id;
-        //    ClienteId = clienteId;
-        //    NumeroDaConta = numeroDaConta;
-        //    DepositoInicial = depositoInicial;
-        //    DataAbertura = dataAbertura;
-        //    Saldo = saldo;
-        //    Cliente = cliente;
-        //}
 }
 

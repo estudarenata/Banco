@@ -1,5 +1,4 @@
 ﻿using Banco.Models.Enums;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Banco.Models

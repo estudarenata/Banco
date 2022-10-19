@@ -2,18 +2,11 @@ using Banco.Data;
 using Banco.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Banco
 {
@@ -32,6 +25,7 @@ namespace Banco
             services.AddDbContext<BancoContext>(opts => opts.UseMySQL(Configuration.GetConnectionString("BancoConnection")));
             services.AddControllers();
             services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IContaRepository, ContaRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Banco", Version = "v1" });

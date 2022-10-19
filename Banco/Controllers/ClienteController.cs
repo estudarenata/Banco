@@ -2,10 +2,8 @@
 using Banco.Data.Repository;
 using Banco.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Banco.Controllers
 {
@@ -46,7 +44,6 @@ namespace Banco.Controllers
             {
                 return Ok(cliente);
             }
-
             return NotFound();
         }
 

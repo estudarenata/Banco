@@ -4,7 +4,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace Banco.Migrations
 {
-    public partial class CriandoTabelaClienteEConta : Migration
+    public partial class criandoTabelas : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -3,10 +3,8 @@ using Banco.Data.Repository;
 using Banco.Models;
 using Banco.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Banco.Controllers
 {
@@ -17,17 +15,21 @@ namespace Banco.Controllers
     {
         private BancoContext _context;
         private readonly IClienteRepository _clienteRepository;
+        private readonly IContaRepository _contaRepository;
 
-        public ContaController(BancoContext context, IClienteRepository clienteRepository)
+        public ContaController(BancoContext context, IClienteRepository clienteRepository, IContaRepository contaRepository)
         {
             _context = context;
             _clienteRepository = clienteRepository;
+            _contaRepository = contaRepository;
         }
 
         [HttpPost]
         public IActionResult AdicionaConta(int clienteId,[FromBody] CriaContaDto contaDto)
         {
-            Conta conta = new Conta() { };
+            Conta conta = new Conta()
+            {
+            };
 
             if (contaDto != null)
             {
@@ -46,10 +48,7 @@ namespace Banco.Controllers
                 _context.SaveChanges();
                 return CreatedAtAction(nameof(RecuperaContasPorId), new { Id = conta.Id }, conta);
             }
-
             return NotFound();
-                      
-           
         }
 
         [HttpGet]
@@ -61,7 +60,8 @@ namespace Banco.Controllers
         [HttpGet("{id}")]
         public IActionResult RecuperaContasPorId(int id)
         {
-            Conta conta = _context.Contas.FirstOrDefault(conta => conta.Id == id);
+            Conta conta = _contaRepository.GetById(id);
+
             if (conta != null)
             {
                 return Ok(conta);
@@ -74,12 +74,6 @@ namespace Banco.Controllers
         public IEnumerable<Conta> RecuperaContasPorClienteId(int clienteId)
         {
             return _context.Contas.Where(contas => contas.ClienteId == clienteId);
-            //if (contas != null)
-            //{
-            //    return Ok(contas);
-            //}
-
-            //return NotFound();
         }
     }
 }
