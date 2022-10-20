@@ -26,6 +26,8 @@ namespace Banco
             services.AddControllers();
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IContaRepository, ContaRepository>();
+            services.AddScoped<ITransacaoRepository, TransacaoRepository>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Banco", Version = "v1" });

@@ -1,16 +1,15 @@
 ﻿using Banco.Models.Enums;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Banco.Models
+namespace Banco.Models.Dto
 {
-    public class Transacao
+    public class CriaTransacaoDto
     {
-        public int Id { get; set; }
-        public int ContaOrigem { get; set; }
-        public int ContaDestino { get; set; }
         public DateTime DataTransacao { get; set; }
         public decimal ValorTransacao { get; set; }
         public TransacaoStatus TipoTransacao { get; set; }
     }
 }
-

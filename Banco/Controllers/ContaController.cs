@@ -70,7 +70,7 @@ namespace Banco.Controllers
             return NotFound();
         }
 
-        [HttpGet("{clienteId}")]
+        [HttpGet("pesquisaPorCliente/{clienteId}")]
         public IEnumerable<Conta> RecuperaContasPorClienteId(int clienteId)
         {
             return _context.Contas.Where(contas => contas.ClienteId == clienteId);

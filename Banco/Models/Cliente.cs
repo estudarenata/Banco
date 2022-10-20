@@ -13,7 +13,6 @@ namespace Banco.Models
         public string Nome { get; set; }
 
         [Required]
-        //[StringLength(2, ErrorMessage = "O tipo é obrigatório")]
         public TipoStatus Tipo { get; set; }
 
         [Required]
@@ -24,18 +23,5 @@ namespace Banco.Models
 
         [StringLength(11, ErrorMessage = "Telefone inválido")]
         public string Telefone { get; set; }
-
-        //public ICollection<Conta> Contas { get; set; } = new List<Conta>();
-
-
-        //public Cliente(int id, string nome, TipoStatus tipo, string cpfCnpj, string endereco, string telefone)
-        //{
-        //    Id = id;
-        //    Nome = nome;
-        //    Tipo = tipo;
-        //    CpfCnpj = cpfCnpj;
-        //    Endereco = endereco;
-        //    Telefone = telefone;
-        //}
     }
 }

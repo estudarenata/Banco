@@ -13,5 +13,7 @@ namespace Banco.Data
         public  DbSet<Cliente> Clientes { get; set; }
 
         public  DbSet<Conta> Contas { get; set; }
+
+        public DbSet<Transacao> Transacoes { get; set; }
     }
 }

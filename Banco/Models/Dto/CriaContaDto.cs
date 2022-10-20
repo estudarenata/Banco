@@ -7,9 +7,9 @@ namespace Banco.Models.Dto
 {
     public class CriaContaDto
     {
-        public string NumeroDaConta { get; set; }
-        public Double DepositoInicial { get; set; }
+        public int NumeroDaConta { get; set; }
+        public decimal DepositoInicial { get; set; }
         public DateTime DataAbertura { get; set; }
-        public Double Saldo { get; set; }
+        public decimal Saldo { get; set; }
     }
 }

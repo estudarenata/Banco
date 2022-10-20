@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Banco.Migrations
 {
     [DbContext(typeof(BancoContext))]
-    [Migration("20221019190919_criandoTabelas")]
-    partial class criandoTabelas
+    [Migration("20221020140640_Criandobanco")]
+    partial class Criandobanco
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -64,8 +64,8 @@ namespace Banco.Migrations
                     b.Property<double>("DepositoInicial")
                         .HasColumnType("double");
 
-                    b.Property<string>("NumeroDaConta")
-                        .HasColumnType("text");
+                    b.Property<int>("NumeroDaConta")
+                        .HasColumnType("int");
 
                     b.Property<double>("Saldo")
                         .HasColumnType("double");
@@ -73,6 +73,32 @@ namespace Banco.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Contas");
+                });
+
+            modelBuilder.Entity("Banco.Models.Transacao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ContaDestino")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ContaOrigem")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataTransacao")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("TipoTransacao")
+                        .HasColumnType("int");
+
+                    b.Property<double>("ValorTransacao")
+                        .HasColumnType("double");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Transacoes");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,8 +5,8 @@ namespace Banco.Data.Repository
 {
     public class ContaRepository : IContaRepository
     {
-        private readonly BancoContext _context;
-
+        private BancoContext _context;
+        
         public ContaRepository(BancoContext context)
         {
             _context = context;
@@ -15,6 +15,18 @@ namespace Banco.Data.Repository
         public Conta GetById(int id)
         {
             var conta = _context.Contas.FirstOrDefault(conta => conta.Id == id);
+            return conta;
+        }
+
+        public Conta GetByContaOrigem(int contaOrigem)
+        {
+            var conta = _context.Contas.FirstOrDefault(conta => conta.NumeroDaConta == contaOrigem);
+            return conta;
+        }
+
+        public Conta GetByContaDestino(int contaDestino)
+        {
+            var conta = _context.Contas.FirstOrDefault(conta => conta.NumeroDaConta == contaDestino);
             return conta;
         }
     }
