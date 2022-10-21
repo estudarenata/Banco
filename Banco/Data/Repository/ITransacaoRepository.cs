@@ -5,5 +5,6 @@ namespace Banco.Data.Repository
     public interface ITransacaoRepository
     {
         public Transacao GetById(int id);
+        void Adiciona(Transacao transacao);
     }
 }

@@ -5,6 +5,10 @@ namespace Banco.Models
 {
     public class Conta
     {
+        public Conta()
+        {
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -14,8 +18,21 @@ namespace Banco.Models
         public DateTime DataAbertura { get; set; }
         public decimal Saldo { get; set; }
 
-        public Conta()
+        public bool TemSaldoSuficiente(decimal valor) 
         {
+            return Saldo >= valor;
+        }
+
+        public decimal Saque(decimal valor)
+        {
+            Saldo -= valor;
+            return Saldo;
+        }
+
+        public decimal Deposito(decimal valor)
+        {
+            Saldo += valor;
+            return Saldo;
         }
     }
 }

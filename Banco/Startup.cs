@@ -1,3 +1,4 @@
+using Banco.Application.Services;
 using Banco.Data;
 using Banco.Data.Repository;
 using Microsoft.AspNetCore.Builder;
@@ -27,6 +28,7 @@ namespace Banco
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IContaRepository, ContaRepository>();
             services.AddScoped<ITransacaoRepository, TransacaoRepository>();
+            services.AddScoped<ITransacaoService, TransacaoService>();
 
             services.AddSwaggerGen(c =>
             {

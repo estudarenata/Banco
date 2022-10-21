@@ -17,5 +17,11 @@ namespace Banco.Data.Repository
             var transacao = _context.Transacoes.FirstOrDefault(transacao => transacao.Id == id);
             return transacao;
         }
+
+        public void Adiciona(Transacao transacao)
+        {
+            _context.Transacoes.Add(transacao);
+            _context.SaveChanges();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Banco.Data;
+﻿using Banco.Application.Services;
+using Banco.Data;
 using Banco.Data.Repository;
 using Banco.Models;
 using Banco.Models.Dto;
@@ -13,14 +14,17 @@ namespace Banco.Controllers
     public class TransacaoController : ControllerBase
     {
         private BancoContext _context;
-        private readonly IContaRepository _contaRepository;
         private readonly ITransacaoRepository _transacaoRepository;
+        private readonly ITransacaoService _transacaoService;
 
-        public TransacaoController(BancoContext context, ITransacaoRepository transacaoRepository, IContaRepository contaRepository)
+        public TransacaoController(
+            BancoContext context, 
+            ITransacaoRepository transacaoRepository, 
+            ITransacaoService transacaoService)
         {
             _context = context;
             _transacaoRepository = transacaoRepository;
-            _contaRepository = contaRepository;
+            _transacaoService = transacaoService;
         }
 
         [HttpPost]
@@ -39,17 +43,8 @@ namespace Banco.Controllers
                 transacao.ContaDestino = contaDestino;
             }
 
-            var verificaContaOrigem = _contaRepository.GetByContaOrigem(transacao.ContaOrigem);
-            var verificaContaDestino = _contaRepository.GetByContaDestino(transacao.ContaDestino);
-
-            if (verificaContaOrigem == null || verificaContaDestino == null || transacao.ValorTransacao == 0)
-            {
-                return NotFound();
-            }
-
-
-            _context.Transacoes.Add(transacao);
-            _context.SaveChanges();
+            _transacaoService.Transferencia(transacao);
+            
             return CreatedAtAction(nameof(RecuperaTransacaoPorId), new { Id = transacao.Id }, transacao);
         }
 

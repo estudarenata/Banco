@@ -18,16 +18,16 @@ namespace Banco.Data.Repository
             return conta;
         }
 
-        public Conta GetByContaOrigem(int contaOrigem)
+        public Conta GetByNumeroDaConta(int numeroDaConta)
         {
-            var conta = _context.Contas.FirstOrDefault(conta => conta.NumeroDaConta == contaOrigem);
+            var conta = _context.Contas.FirstOrDefault(conta => conta.NumeroDaConta == numeroDaConta);
             return conta;
         }
 
-        public Conta GetByContaDestino(int contaDestino)
+        public void Atualiza(Conta conta)
         {
-            var conta = _context.Contas.FirstOrDefault(conta => conta.NumeroDaConta == contaDestino);
-            return conta;
+            _context.Contas.Update(conta);
+            _context.SaveChanges();
         }
     }
 }
