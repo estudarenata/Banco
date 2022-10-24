@@ -1,4 +1,5 @@
 ﻿using Banco.Models;
+using System.Collections.Generic;
 
 namespace Banco.Data.Repository
 {
@@ -6,5 +7,6 @@ namespace Banco.Data.Repository
     {
         public Transacao GetById(int id);
         void Adiciona(Transacao transacao);
+        public IEnumerable<Transacao> GetAll();
     }
 }

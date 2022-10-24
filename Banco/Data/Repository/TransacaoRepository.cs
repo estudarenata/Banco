@@ -1,4 +1,5 @@
 ﻿using Banco.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Banco.Data.Repository
@@ -23,5 +24,11 @@ namespace Banco.Data.Repository
             _context.Transacoes.Add(transacao);
             _context.SaveChanges();
         }
+
+        public IEnumerable<Transacao> GetAll()
+        {
+            return _context.Transacoes;
+        }
+
     }
 }

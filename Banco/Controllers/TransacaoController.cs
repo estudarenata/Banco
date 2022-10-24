@@ -1,10 +1,8 @@
 ﻿using Banco.Application.Services;
-using Banco.Data;
 using Banco.Data.Repository;
 using Banco.Models;
 using Banco.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace Banco.Controllers
 {
@@ -13,16 +11,12 @@ namespace Banco.Controllers
 
     public class TransacaoController : ControllerBase
     {
-        private BancoContext _context;
+        //private BancoContext _context;
         private readonly ITransacaoRepository _transacaoRepository;
         private readonly ITransacaoService _transacaoService;
 
-        public TransacaoController(
-            BancoContext context, 
-            ITransacaoRepository transacaoRepository, 
-            ITransacaoService transacaoService)
+        public TransacaoController(ITransacaoRepository transacaoRepository, ITransacaoService transacaoService)
         {
-            _context = context;
             _transacaoRepository = transacaoRepository;
             _transacaoService = transacaoService;
         }
@@ -45,19 +39,19 @@ namespace Banco.Controllers
 
             _transacaoService.Transferencia(transacao);
             
-            return CreatedAtAction(nameof(RecuperaTransacaoPorId), new { Id = transacao.Id }, transacao);
+            return CreatedAtAction(nameof(GetById), new { Id = transacao.Id }, transacao);
         }
 
         [HttpGet]
-        public IEnumerable<Transacao> RecuperaTransacao()
+        public IActionResult RecuperaTransacao()
         {
-            return _context.Transacoes;
+            return Ok(_transacaoService.GetAll());
         }
 
         [HttpGet("{id}")]
-        public IActionResult RecuperaTransacaoPorId(int id)
+        public IActionResult GetById(int id)
         {
-            Transacao transacao = _transacaoRepository.GetById(id);
+            var transacao = _transacaoService.GetById(id);
 
             if (transacao != null)
             {

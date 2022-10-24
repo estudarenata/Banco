@@ -1,6 +1,8 @@
 ﻿using Banco.Data.Repository;
 using Banco.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 namespace Banco.Application.Services
 {
@@ -38,6 +40,18 @@ namespace Banco.Application.Services
             _contaRepository.Atualiza(contaDestino);
 
             _transacaoRepository.Adiciona(transacao);
+        }
+
+        public IEnumerable<Transacao> GetAll()
+        {
+            return _transacaoRepository.GetAll();
+        }
+
+        public Transacao GetById(int id)
+        {
+            return _transacaoRepository.GetById(id);
+            //return (IActionResult)transacao;
+
         }
     }
 }
