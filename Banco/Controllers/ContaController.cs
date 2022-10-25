@@ -4,8 +4,6 @@ using Banco.Data.Repository;
 using Banco.Models;
 using Banco.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Banco.Controllers
 {
@@ -14,16 +12,10 @@ namespace Banco.Controllers
 
     public class ContaController : ControllerBase
     {
-        private BancoContext _context;
-        private readonly IClienteRepository _clienteRepository;
-        private readonly IContaRepository _contaRepository;
         private readonly IContaService _contaService;
 
-        public ContaController(BancoContext context, IClienteRepository clienteRepository, IContaRepository contaRepository, IContaService contaService)
+        public ContaController(IContaService contaService)
         {
-            _context = context;
-            _clienteRepository = clienteRepository;
-            _contaRepository = contaRepository;
             _contaService = contaService;
         }
 

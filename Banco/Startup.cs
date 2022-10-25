@@ -26,6 +26,7 @@ namespace Banco
             services.AddDbContext<BancoContext>(opts => opts.UseMySQL(Configuration.GetConnectionString("BancoConnection")));
             services.AddControllers();
             services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<IContaRepository, ContaRepository>();
             services.AddScoped<IContaService, ContaService>();
             services.AddScoped<ITransacaoRepository, TransacaoRepository>();

@@ -1,9 +1,6 @@
-﻿using Banco.Data;
-using Banco.Data.Repository;
+﻿using Banco.Application.Services;
 using Banco.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Banco.Controllers
 {
@@ -12,33 +9,31 @@ namespace Banco.Controllers
 
     public class ClienteController : ControllerBase
     {
-        private BancoContext _context;
-        private readonly IClienteRepository _clienteRepository;
+        private readonly IClienteService _clienteService;
 
-        public ClienteController(BancoContext context, IClienteRepository clienteRepository)
+        public ClienteController(IClienteService clienteService)
         {
-            _context = context;
-            _clienteRepository = clienteRepository;
+            _clienteService = clienteService;
         }
 
         [HttpPost]
         public IActionResult AdicionaCliente([FromBody]Cliente cliente)
         {
-            _context.Clientes.Add(cliente);
-            _context.SaveChanges();
-            return CreatedAtAction(nameof(RecuperaClientesPorId), new { Id = cliente.Id }, cliente);
+            _clienteService.AddClienteService(cliente);
+
+            return CreatedAtAction(nameof(GetById), new { Id = cliente.Id }, cliente);
         }
 
         [HttpGet]
-        public IEnumerable<Cliente> RecuperaClientes()
+        public IActionResult GetClient()
         {
-            return _context.Clientes;
+            return Ok(_clienteService.GetAll());
         }
 
         [HttpGet("{id}")]
-        public IActionResult RecuperaClientesPorId(int id)
+        public IActionResult GetById(int id)
         {
-            Cliente cliente = _clienteRepository.GetById(id);
+            var cliente = _clienteService.GetById(id);
             
             if(cliente != null)
             {
@@ -50,7 +45,8 @@ namespace Banco.Controllers
         [HttpPut("{id}")]
         public IActionResult AtualizaCliente(int id, [FromBody] Cliente clienteNovo)
         {
-            Cliente cliente = _context.Clientes.FirstOrDefault(cliente => cliente.Id == id);
+            var cliente = _clienteService.GetById(id);
+
             if (cliente == null) 
             {
                 return NotFound("Cliente não existe");
@@ -60,8 +56,10 @@ namespace Banco.Controllers
             cliente.CpfCnpj = clienteNovo.CpfCnpj;
             cliente.Endereco = clienteNovo.Endereco;
             cliente.Telefone = clienteNovo.Telefone;
-            _context.SaveChanges();
-            return NoContent();
+
+            _clienteService.PutClient(clienteNovo);
+            
+            return Ok(clienteNovo);
         }
     }
 }
