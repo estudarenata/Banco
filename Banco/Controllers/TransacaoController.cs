@@ -11,7 +11,6 @@ namespace Banco.Controllers
 
     public class TransacaoController : ControllerBase
     {
-        //private BancoContext _context;
         private readonly ITransacaoRepository _transacaoRepository;
         private readonly ITransacaoService _transacaoService;
 

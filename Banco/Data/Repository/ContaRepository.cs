@@ -1,4 +1,5 @@
 ﻿using Banco.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Banco.Data.Repository
@@ -10,6 +11,17 @@ namespace Banco.Data.Repository
         public ContaRepository(BancoContext context)
         {
             _context = context;
+        }
+
+        public void AddContaRepository(Conta conta) 
+        {
+            _context.Contas.Add(conta);
+            _context.SaveChanges();
+        }
+
+        public IEnumerable<Conta> GetAll() 
+        {
+            return _context.Contas;
         }
 
         public Conta GetById(int id)
@@ -28,6 +40,12 @@ namespace Banco.Data.Repository
         {
             _context.Contas.Update(conta);
             _context.SaveChanges();
+        }
+
+        public IEnumerable<Conta> GetByClientIdAll(int clienteId) 
+        {
+            var conta = _context.Contas.Where(contas => contas.ClienteId == clienteId);
+            return conta;
         }
     }
 }

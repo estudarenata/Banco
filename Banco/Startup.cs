@@ -27,6 +27,7 @@ namespace Banco
             services.AddControllers();
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IContaRepository, ContaRepository>();
+            services.AddScoped<IContaService, ContaService>();
             services.AddScoped<ITransacaoRepository, TransacaoRepository>();
             services.AddScoped<ITransacaoService, TransacaoService>();
 

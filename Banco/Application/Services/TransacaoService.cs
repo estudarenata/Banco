@@ -1,6 +1,5 @@
 ﻿using Banco.Data.Repository;
 using Banco.Models;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 
@@ -50,8 +49,6 @@ namespace Banco.Application.Services
         public Transacao GetById(int id)
         {
             return _transacaoRepository.GetById(id);
-            //return (IActionResult)transacao;
-
         }
     }
 }
