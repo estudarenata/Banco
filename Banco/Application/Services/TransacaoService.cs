@@ -1,5 +1,6 @@
 ﻿using Banco.Data.Repository;
 using Banco.Models;
+using Banco.Models.Enums;
 using System;
 using System.Collections.Generic;
 
@@ -17,6 +18,18 @@ namespace Banco.Application.Services
             _transacaoRepository = transacaoRepository;
         }
 
+        public void Transacao(Transacao transacao) 
+        {
+            if (transacao.TipoTransacao == TransacaoStatus.Transferencia)
+            {
+                Transferencia(transacao);
+            }
+            else
+            {                
+                DepositoSaque(transacao);
+            }
+        }
+                
         public void Transferencia(Transacao transacao) 
         {
             var contaOrigem = _contaRepository.GetByNumeroDaConta(transacao.ContaOrigem);
@@ -35,9 +48,33 @@ namespace Banco.Application.Services
             contaOrigem.Saque(transacao.ValorTransacao);
             contaDestino.Deposito(transacao.ValorTransacao);
 
-            _contaRepository.Atualiza(contaOrigem);
-            _contaRepository.Atualiza(contaDestino);
+            _contaRepository.AtualizaSaldo(contaOrigem);
+            _contaRepository.AtualizaSaldo(contaDestino);
 
+            _transacaoRepository.Adiciona(transacao);
+        }
+
+        public void DepositoSaque(Transacao transacao) 
+        {
+            var contaOrigem = _contaRepository.GetByNumeroDaConta(transacao.ContaOrigem);
+            
+            if (contaOrigem == null || transacao.ValorTransacao == 0)
+            {
+                throw new Exception("Transacao Inválida!");
+            }
+
+            if (transacao.TipoTransacao == TransacaoStatus.Deposito) 
+            {
+                contaOrigem.Deposito(transacao.ValorTransacao);
+            }
+            else
+            {
+                contaOrigem.Saque(transacao.ValorTransacao);
+            }
+            
+            transacao.ContaDestino = 0;
+            
+            _contaRepository.AtualizaSaldo(contaOrigem);
             _transacaoRepository.Adiciona(transacao);
         }
 
@@ -50,5 +87,11 @@ namespace Banco.Application.Services
         {
             return _transacaoRepository.GetById(id);
         }
+
+        public IEnumerable<Transacao> ExtractByConta(int contaId) 
+        {
+            return _transacaoRepository.ExtractByContaRepository(contaId);
+        }
+            
     }
 }

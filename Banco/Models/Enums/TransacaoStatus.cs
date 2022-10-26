@@ -3,6 +3,7 @@
     public enum TransacaoStatus : int
     {
         Transferencia = 0,
-        Deposito = 1
+        Deposito = 1,
+        Saque = 2
     }
 }

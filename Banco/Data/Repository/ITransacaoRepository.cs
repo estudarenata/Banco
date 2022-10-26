@@ -8,5 +8,6 @@ namespace Banco.Data.Repository
         public Transacao GetById(int id);
         void Adiciona(Transacao transacao);
         public IEnumerable<Transacao> GetAll();
+        public IEnumerable<Transacao> ExtractByContaRepository(int contaId);
     }
 }

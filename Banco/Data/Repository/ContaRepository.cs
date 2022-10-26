@@ -36,7 +36,7 @@ namespace Banco.Data.Repository
             return conta;
         }
 
-        public void Atualiza(Conta conta)
+        public void AtualizaSaldo(Conta conta)
         {
             _context.Contas.Update(conta);
             _context.SaveChanges();

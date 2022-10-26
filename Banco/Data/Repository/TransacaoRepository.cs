@@ -30,5 +30,10 @@ namespace Banco.Data.Repository
             return _context.Transacoes;
         }
 
+        public IEnumerable<Transacao> ExtractByContaRepository(int contaId) 
+        {
+            var extrato = _context.Transacoes.Where(extrato => extrato.ContaOrigem == contaId);
+            return extrato;
+        }
     }
 }

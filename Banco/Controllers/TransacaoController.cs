@@ -20,7 +20,7 @@ namespace Banco.Controllers
             _transacaoService = transacaoService;
         }
 
-        [HttpPost]
+        [HttpPost("TransferenciaDepositoSaque")]
         public IActionResult AdicionaTransacao(int contaOrigem, int contaDestino, [FromBody] CriaTransacaoDto transacaoDto)
         {
             Transacao transacao = new Transacao()
@@ -36,11 +36,11 @@ namespace Banco.Controllers
                 transacao.ContaDestino = contaDestino;
             }
 
-            _transacaoService.Transferencia(transacao);
+            _transacaoService.Transacao(transacao);
             
             return CreatedAtAction(nameof(GetById), new { Id = transacao.Id }, transacao);
         }
-
+                
         [HttpGet]
         public IActionResult RecuperaTransacao()
         {
@@ -57,6 +57,12 @@ namespace Banco.Controllers
                 return Ok(transacao);
             }
             return NotFound();
+        }
+
+        [HttpGet("ExtractByConta/{contaId}")]
+        public IActionResult ExtractByConta(int contaId)
+        {
+            return Ok(_transacaoService.ExtractByConta(contaId));
         }
     }
 }
