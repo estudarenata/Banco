@@ -23,13 +23,13 @@ namespace Banco.Models
             return Saldo >= valor;
         }
 
-        public decimal Saque(decimal valor)
+        public decimal DebitaDoSaldo(decimal valor)
         {
             Saldo -= valor;
             return Saldo;
         }
 
-        public decimal Deposito(decimal valor)
+        public decimal CreditaDoSaldo(decimal valor)
         {
             Saldo += valor;
             return Saldo;

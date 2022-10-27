@@ -45,9 +45,10 @@ namespace Banco.Application.Services
                 throw new Exception("Saldo Insuficiente!");
             }
 
-            contaOrigem.Saque(transacao.ValorTransacao);
-            contaDestino.Deposito(transacao.ValorTransacao);
-
+            transacao.ValorTaxaTransferencia();
+            contaDestino.CreditaDoSaldo(transacao.ValorTransacao);
+            contaOrigem.DebitaDoSaldo(transacao.ValorTransacao + transacao.ValorTaxaTransacao);
+            
             _contaRepository.AtualizaSaldo(contaOrigem);
             _contaRepository.AtualizaSaldo(contaDestino);
 
@@ -65,11 +66,14 @@ namespace Banco.Application.Services
 
             if (transacao.TipoTransacao == TransacaoStatus.Deposito) 
             {
-                contaOrigem.Deposito(transacao.ValorTransacao);
+                transacao.ValorTaxaDeposito(transacao.ValorTransacao);
+                contaOrigem.DebitaDoSaldo(transacao.ValorTaxaTransacao);
+                contaOrigem.CreditaDoSaldo(transacao.ValorTransacao);
             }
             else
             {
-                contaOrigem.Saque(transacao.ValorTransacao);
+                transacao.ValorTaxaSaque();
+                contaOrigem.DebitaDoSaldo(transacao.ValorTransacao + transacao.ValorTaxaTransacao);
             }
             
             transacao.ContaDestino = 0;

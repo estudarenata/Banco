@@ -4,7 +4,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace Banco.Migrations
 {
-    public partial class Criandobanco : Migration
+    public partial class CriandoBanco : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,9 +33,9 @@ namespace Banco.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
                     NumeroDaConta = table.Column<int>(type: "int", nullable: false),
-                    DepositoInicial = table.Column<double>(type: "double", nullable: false),
+                    DepositoInicial = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
                     DataAbertura = table.Column<DateTime>(type: "datetime", nullable: false),
-                    Saldo = table.Column<double>(type: "double", nullable: false)
+                    Saldo = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -51,8 +51,9 @@ namespace Banco.Migrations
                     ContaOrigem = table.Column<int>(type: "int", nullable: false),
                     ContaDestino = table.Column<int>(type: "int", nullable: false),
                     DataTransacao = table.Column<DateTime>(type: "datetime", nullable: false),
-                    ValorTransacao = table.Column<double>(type: "double", nullable: false),
-                    TipoTransacao = table.Column<int>(type: "int", nullable: false)
+                    ValorTransacao = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    TipoTransacao = table.Column<int>(type: "int", nullable: false),
+                    ValorTaxaTransacao = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
                 },
                 constraints: table =>
                 {

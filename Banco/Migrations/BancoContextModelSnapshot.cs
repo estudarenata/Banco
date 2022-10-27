@@ -59,14 +59,14 @@ namespace Banco.Migrations
                     b.Property<DateTime>("DataAbertura")
                         .HasColumnType("datetime");
 
-                    b.Property<double>("DepositoInicial")
-                        .HasColumnType("double");
+                    b.Property<decimal>("DepositoInicial")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<int>("NumeroDaConta")
                         .HasColumnType("int");
 
-                    b.Property<double>("Saldo")
-                        .HasColumnType("double");
+                    b.Property<decimal>("Saldo")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.HasKey("Id");
 
@@ -91,8 +91,11 @@ namespace Banco.Migrations
                     b.Property<int>("TipoTransacao")
                         .HasColumnType("int");
 
-                    b.Property<double>("ValorTransacao")
-                        .HasColumnType("double");
+                    b.Property<decimal>("ValorTaxaTransacao")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal>("ValorTransacao")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.HasKey("Id");
 
